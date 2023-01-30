@@ -41,15 +41,21 @@ public class FileHandler {
         // the beginning of the file. This will not behave well
         // unless every line is the same length
 
+        // use random file access instead of buffered reader
+
+
+
         try (PrintWriter pw = new PrintWriter(new FileWriter(fileName)); BufferedReader br = new BufferedReader(new FileReader(fileName))){
             ArrayList<String> contents = new ArrayList();
             String line = br.readLine();
             contents.add(line);
 
-            while (line != null){
+            for (int i =0; i<FileHandler.countLines(fileName); i++){
                 contents.add(line);
                 line = br.readLine();
             }
+            contents.add(line);
+
 
             for (int i =0; i< contents.size(); i++){
                 System.out.println(contents.get(i));
