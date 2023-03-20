@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class FileHandler {
@@ -45,23 +46,27 @@ public class FileHandler {
 
 
 
-        try (PrintWriter pw = new PrintWriter(new FileWriter(fileName)); BufferedReader br = new BufferedReader(new FileReader(fileName))){
+        try (PrintWriter pw = new PrintWriter(new FileWriter(fileName)); RandomAccessFile rf = new RandomAccessFile(fileName, "rws")){
             ArrayList<String> contents = new ArrayList();
-            String line = br.readLine();
-            contents.add(line);
+            String line = "";
+            int count = 0;
 
-            for (int i =0; i<FileHandler.countLines(fileName); i++){
-                contents.add(line);
-                line = br.readLine();
+
+            while (count != start){
+               contents.add(count, rf.readLine());
+               System.out.println(rf.readLine());
+               count++;
             }
-            contents.add(line);
+            contents.add(start, data);
+            count++;
 
-
-            for (int i =0; i< contents.size(); i++){
-                System.out.println(contents.get(i));
+            while (rf.readLine() != null){
+                contents.add(count, rf.readLine());
+                rf.readLine();
+                count++;
             }
 
-            contents.set(start, data);
+
 
             for (int i =0; i<contents.size(); i++)
                 pw.println(contents.get(i));
