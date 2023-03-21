@@ -48,19 +48,23 @@ public class FileHandler {
 
         try (PrintWriter pw = new PrintWriter(new FileWriter(fileName)); RandomAccessFile rf = new RandomAccessFile(fileName, "rws")){
             ArrayList<String> contents = new ArrayList();
-            String line = "";
             int count = 0;
+            rf.seek(0);
+            String line = rf.readLine();
+
 
 
             while (count != start){
-               contents.add(count, rf.readLine());
-               System.out.println(rf.readLine());
+               contents.add(count, line);
                count++;
+               line = rf.readLine();
             }
+
             contents.add(start, data);
             count++;
 
-            while (rf.readLine() != null){
+
+            while (line != null){
                 contents.add(count, rf.readLine());
                 rf.readLine();
                 count++;
@@ -68,8 +72,15 @@ public class FileHandler {
 
 
 
-            for (int i =0; i<contents.size(); i++)
+            for (int i =0; i<contents.size(); i++){
                 pw.println(contents.get(i));
+            }
+
+
+
+
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
