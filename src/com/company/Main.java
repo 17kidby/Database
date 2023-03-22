@@ -17,6 +17,8 @@ public class Main {
        // System.out.println("count = " + db.getRecordCount()); // 4
         FileHandler.appendLine("test.txt", "sans");
         FileHandler.appendLine("test.txt", "jesus");
+        System.out.println(FileHandler.readLineAt("test.txt", 0));
+        System.out.println(FileHandler.readLineAt("test.txt", 0));
         FileHandler.writeLineAt("test.txt", "peor", 2);
     }
 }

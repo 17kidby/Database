@@ -46,18 +46,17 @@ public class FileHandler {
 
 
 
-        try (PrintWriter pw = new PrintWriter(new FileWriter(fileName)); RandomAccessFile rf = new RandomAccessFile(fileName, "rws")){
+        try (PrintWriter pw = new PrintWriter(new FileWriter(fileName)); RandomAccessFile rf = new RandomAccessFile(fileName, "rws"); BufferedReader br = new BufferedReader(new FileReader(fileName));){
             ArrayList<String> contents = new ArrayList();
             int count = 0;
-            rf.seek(0);
-            String line = rf.readLine();
+            String line = br.readLine();
 
 
 
             while (count != start){
                contents.add(count, line);
                count++;
-               line = rf.readLine();
+               line = br.readLine();
             }
 
             contents.add(start, data);
@@ -65,7 +64,7 @@ public class FileHandler {
 
 
             while (line != null){
-                contents.add(count, rf.readLine());
+                contents.add(count, br.readLine());
                 rf.readLine();
                 count++;
             }
