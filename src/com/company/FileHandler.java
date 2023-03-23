@@ -49,25 +49,22 @@ public class FileHandler {
         try (PrintWriter pw = new PrintWriter(new FileWriter(fileName)); RandomAccessFile rf = new RandomAccessFile(fileName, "rws"); BufferedReader br = new BufferedReader(new FileReader(fileName));){
             ArrayList<String> contents = new ArrayList();
             int count = 0;
-            String line = br.readLine();
+            String line = "sans";
 
 
 
-            while (count != start){
-               contents.add(count, line);
-               count++;
-               line = br.readLine();
+            while (line != null){
+                line = br.readLine();
+                contents.add(count, line);
+                count++;
+
             }
 
             contents.add(start, data);
             count++;
 
 
-            while (line != null){
-                contents.add(count, br.readLine());
-                rf.readLine();
-                count++;
-            }
+
 
 
 

@@ -18,7 +18,7 @@ public class Main {
         FileHandler.appendLine("test.txt", "sans");
         FileHandler.appendLine("test.txt", "jesus");
         System.out.println(FileHandler.readLineAt("test.txt", 0));
-        System.out.println(FileHandler.readLineAt("test.txt", 0));
+        System.out.println(FileHandler.readLineAt("test.txt", 1));
         FileHandler.writeLineAt("test.txt", "peor", 2);
     }
 }
